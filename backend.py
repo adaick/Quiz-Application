@@ -17,6 +17,18 @@ password VARCHAR(20) NOT NULL);
 """)
 db.commit()
 
+# creating the table for admin if it doesn't exist
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS admin(
+adminID INTEGER PRIMARY KEY,
+adminname VARCHAR(20) NOT NULL,
+Fname VARCHAR(20) NOT NULL,
+Lname VARCHAR(20) NOT NULL,
+password VARCHAR(20) NOT NULL);
+""")
+db.commit()
+
 # creating table for the different set of quiz
 
 cursor.execute("""
@@ -51,6 +63,7 @@ option2 VARCHAR(50) NOT NULL,
 option3 VARCHAR(50),
 option4 VARCHAR(50),
 answer VARCHAR(50),
+level VARCHAR(10),
 FOREIGN KEY(quizID) REFERENCES quizzes(quizID));
 """)
 db.commit()
@@ -81,3 +94,7 @@ db.commit()
 # ORDER BY name;
 # """)
 # print(cursor.fetchall())
+
+cursor.execute(""" INSERT INTO admin(adminname,Fname,Lname,password)
+VALUES("admin","Qaifi","Khan","1234qwer")""")
+db.commit()

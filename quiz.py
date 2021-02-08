@@ -4,10 +4,15 @@ import sqlite3
 def quiz(quiz, user):
     with sqlite3.connect("quizdatabase.db")as db:
         cursor = db.cursor()
-
+        
+    lvl = int(input(print("""Enter level of quiz you want to take \n
+    1 - Easy
+    2- Medium
+    3 - Hard
+    """)))
     score = 0
     Qnum = 0
-    cursor.execute("SELECT * FROM questions WHERE quizID=?;", [(quiz)])
+    cursor.execute("SELECT * FROM questions WHERE quizID=? AND level=?;", [(quiz),(lvl)])
     questions = cursor.fetchall()
 
     for question in questions:
@@ -21,6 +26,7 @@ def quiz(quiz, user):
             print("")
         else:
             print("Incorrect")
+            print("Correct answer of this question is " + str(question[7]))
         
         Qnum += 1
         
@@ -33,7 +39,7 @@ def quiz(quiz, user):
 		
 
     scorePercent = int((score/Qnum)*100)
-    print("You scored %s percent" %scorePercent)
+    print("You scored %s percent :- " %scorePercent)
     print("")
 
     insertData = ("INSERT INTO scores(userID, score, quizID) VALUES(?,?,?);")
