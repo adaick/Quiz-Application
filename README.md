@@ -9,7 +9,6 @@ Operations
 - ADD_USER: User details will be asked in CLI
 - ADD_QUESTION: Question details and MCQ options details will be asked by CLI
 
-Both these above operations will write to an SQLite3 database
 
 ## User mode
 
